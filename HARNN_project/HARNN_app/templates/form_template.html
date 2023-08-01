@@ -1,0 +1,114 @@
+<!-- form_template.html -->
+<!-- {% if success_message %}
+    <p>{{ success_message }}</p>
+{% endif %}
+
+<h1>Upload a file</h1>
+
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Upload</button>
+</form> -->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Form Example</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			background-color: #f5f5f5;
+		}
+		h1 {
+			margin-top: 20px;
+			margin-bottom: 50px;
+			text-align: center;
+		}
+		form {
+			background-color: #ffffff;
+			max-width: 600px;
+			margin: 0 auto;
+			padding: 20px;
+			border-radius: 10px;
+			box-shadow: 0 0 10px rgba(0,0,0,0.1);
+		}
+		label {
+			display: block;
+			font-weight: bold;
+			margin-bottom: 10px;
+		}
+		textarea,
+		input[type="file"] {
+			display: block;
+			width: 100%;
+			padding: 10px;
+			margin-bottom: 20px;
+
+			border-radius: 5px;
+			border: none;
+			box-shadow: 0 0 5px rgba(0,0,0,0.1);
+			font-size: 16px;
+			font-family: inherit;
+			resize: none;
+		}
+		input[type="submit"] {
+			background-color: #4CAF50;
+			color: #ffffff;
+			font-size: 16px;
+			font-weight: bold;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+      margin-bottom: 20px;
+
+		}
+		input[type="submit"]:hover {
+			background-color: #3e8e41;
+      
+		}
+		#output {
+			background-color: #ffffff;
+			max-width: 600px;
+			margin: 0 auto;
+			padding: 20px;
+			border-radius: 10px;
+			box-shadow: 0 0 10px rgba(0,0,0,0.1);
+		}
+	</style>
+</head>
+<body>
+	<h1>HARNN Text Classifier</h1>
+	<form action="#" method="post" enctype="multipart/form-data">
+		{% csrf_token %}
+		<label for="title">Enter Title:</label>
+		<textarea id="title" name="title" rows="1"></textarea>
+		<label for="paragraph">Enter Content:</label>
+		<textarea id="paragraph" name="paragraph" rows="10"></textarea>
+
+		<!-- Embedding selection -->
+		<label for="embedding">Select Embedding:</label>
+		<select id="embedding" name="embedding">
+			<option value="word2vec">Word2Vec</option>
+			<option value="fasttext">FastText</option>
+		</select>
+
+		<!-- Approach selection -->
+		<label for="approach">Select Approach:</label>
+		<select id="approach" name="approach">
+			<option value="global">Global</option>
+			<option value="domain-based">Domain-Based</option>
+		</select>
+
+		<input type="submit" value="Submit content">
+	</form>
+	<div id="output">
+		<h2>Output:</h2>
+		{% if classification_result %}
+		{{ classification_result|safe }}
+		{% endif %}
+	</div>
+</body>
+</html>
