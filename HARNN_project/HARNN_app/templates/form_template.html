@@ -81,7 +81,7 @@
 </head>
 <body>
 	<h1>HARNN Text Classifier</h1>
-	<form action="#" method="post" enctype="multipart/form-data">
+	<form action="#" method="post" enctype="multipart/form-data" id="classification-form">
 		{% csrf_token %}
 		<label for="title">Enter Title:</label>
 		<textarea id="title" name="title" rows="1"></textarea>
@@ -110,5 +110,42 @@
 		{{ classification_result|safe }}
 		{% endif %}
 	</div>
+
+	<script>
+		// Retain the input values after form submission
+		const classificationForm = document.getElementById('classification-form');
+		const titleInput = document.getElementById('title');
+		const paragraphInput = document.getElementById('paragraph');
+		const embeddingSelect = document.getElementById('embedding');
+		const approachSelect = document.getElementById('approach');
+
+		// When the form is submitted, store the input values in local storage
+		classificationForm.addEventListener('submit', () => {
+			localStorage.setItem('titleInput', titleInput.value);
+			localStorage.setItem('paragraphInput', paragraphInput.value);
+			localStorage.setItem('embeddingSelect', embeddingSelect.value);
+			localStorage.setItem('approachSelect', approachSelect.value);
+		});
+
+		// When the page loads, restore the input values from local storage
+		window.addEventListener('load', () => {
+			const storedTitle = localStorage.getItem('titleInput');
+			const storedParagraph = localStorage.getItem('paragraphInput');
+			const storedEmbedding = localStorage.getItem('embeddingSelect');
+			const storedApproach = localStorage.getItem('approachSelect');
+			if (storedTitle) {
+				titleInput.value = storedTitle;
+			}
+			if (storedParagraph) {
+				paragraphInput.value = storedParagraph;
+			}
+			if (storedEmbedding) {
+				embeddingSelect.value = storedEmbedding;
+			}
+			if (storedApproach) {
+				approachSelect.value = storedApproach;
+			}
+		});
+	</script>
 </body>
 </html>
